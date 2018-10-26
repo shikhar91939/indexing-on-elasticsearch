@@ -1,0 +1,61 @@
+PUT /ohsumed_20000/
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "store": {
+        "type": "fs"
+      }
+    }
+  }
+}
+
+
+
+GET _cat/indices
+
+GET ohsumed_20000/_settings
+
+PUT /ohsumed_20000/document/_mapping
+{
+  "document": {
+    "properties": {
+      "file_name": {
+        "store": true,
+        "type": "keyword"
+      },
+      "codes": {
+        "store": true,
+        "type": "keyword"
+      },
+      "body": {
+        "type": "text",
+        "store": true,
+        "term_vector": "with_positions",
+        "analyzer": "english"
+      },
+      "split": {
+        "type": "keyword",
+        "store": true
+      },
+      "body_field_length": {
+        "type": "integer",
+        "store": true
+      }
+    }
+  }
+}
+
+GET /ohsumed_20000/document/_mapping
+
+PUT /ohsumed_20000/_settings
+{
+    "index" : {
+        "max_result_window" : 10000000
+    }
+}
+
+
+
+
