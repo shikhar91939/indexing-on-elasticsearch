@@ -13,11 +13,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by shikhar.prasoon on 5/20/17.
+ * Created by shikhar.prasoon on 10/26/18.
  */
-public class Indexer {
-    private static final String INDEX_NAME = "ohsumed_20000";
-    private static String ohsumedDir_path = "/Users/Elasticsearch/Downloads/ohsumed-first-20000-docs";
+public class BulkIndexer {
+    private static final String INDEX_NAME = "ohsumed_2000";
+    private static final String ohsumedDir_path = "/Users/Elasticsearch/Downloads/ohsumed-first-20000-docs";
 
     public static void main(String[] args) {
         Gson gson = new Gson();
@@ -28,6 +28,8 @@ public class Indexer {
             RestClient restClient = RestClient.builder(
                     new HttpHost("localhost", 9200, "http"),
                     new HttpHost("localhost", 9205, "http")).build();
+
+            /*use this after this point : https://stackoverflow.com/questions/43339120/elasticsearch-bulk-insert-using-rest-client*/
 
             long total_indexedFiles = 0;
             for (File file : files) {
@@ -43,6 +45,7 @@ public class Indexer {
                     HttpEntity httpEntity = new NStringEntity(
                             jsonSource_gson,
                             ContentType.APPLICATION_JSON);
+
                     Response response = restClient.performRequest(
                             "PUT",
                             INDEX_NAME +"/document/"+(++total_indexedFiles),
