@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by shikhar.prasoon on 5/20/17.
@@ -33,16 +34,23 @@ public class Indexer {
             for (File file : files) {
                  System.out.print(".");
                 try  {
-                    String content = new String(Files.readAllBytes(Paths.get(file.getPath())));
                     String name = file.getName();
+                    Optional<Ohsumed_doc> indexedDoc = esFindDoc(name);
+                    String content = new String(Files.readAllBytes(Paths.get(file.getPath())));
+                    File parent = file.getParentFile();
+                    String parentName = parent.getName();
+                    String grandParentName = parent.getParentFile().getName();
 
                     // Using Gson to make java Objects and then convert them to json strings
                     Ohsumed_doc obj_ohsOhsumed_doc = new Ohsumed_doc(name, content);
+                    obj_ohsOhsumed_doc.addCode(parentName);
+                    obj_ohsOhsumed_doc.setSplit(grandParentName);
                     String jsonSource_gson = gson.toJson(obj_ohsOhsumed_doc);
 
                     HttpEntity httpEntity = new NStringEntity(
                             jsonSource_gson,
                             ContentType.APPLICATION_JSON);
+                    System.exit(1);
                     Response response = restClient.performRequest(
                             "PUT",
                             INDEX_NAME +"/document/"+(++total_indexedFiles),
@@ -61,5 +69,9 @@ public class Indexer {
             e.printStackTrace();
             System.exit(-1);
         }
+    }
+
+    private static Optional<Ohsumed_doc> esFindDoc(String name) {
+        return null;
     }
 }

@@ -21,6 +21,8 @@ public class BulkIndexer {
 
     public static void main(String[] args) {
         Gson gson = new Gson();
+        // commenting just to remove the yellow line due to duplicate code
+/*
         try {
             // getting all files
             List<File> files = DirWalker.getFiles(ohsumedDir_path);
@@ -29,7 +31,9 @@ public class BulkIndexer {
                     new HttpHost("localhost", 9200, "http"),
                     new HttpHost("localhost", 9205, "http")).build();
 
-            /*use this after this point : https://stackoverflow.com/questions/43339120/elasticsearch-bulk-insert-using-rest-client*/
+            */
+/*use this after this point : https://stackoverflow.com/questions/43339120/elasticsearch-bulk-insert-using-rest-client*//*
+
 
             long total_indexedFiles = 0;
             for (File file : files) {
@@ -64,5 +68,6 @@ public class BulkIndexer {
             e.printStackTrace();
             System.exit(-1);
         }
+*/
     }
 }
