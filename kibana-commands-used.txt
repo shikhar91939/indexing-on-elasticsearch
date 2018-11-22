@@ -1,3 +1,5 @@
+DELETE /ohsumed_20000
+
 PUT /ohsumed_20000/
 {
   "settings": {
@@ -10,12 +12,6 @@ PUT /ohsumed_20000/
     }
   }
 }
-
-
-
-GET _cat/indices
-
-GET ohsumed_20000/_settings
 
 PUT /ohsumed_20000/document/_mapping
 {
@@ -47,8 +43,6 @@ PUT /ohsumed_20000/document/_mapping
   }
 }
 
-GET /ohsumed_20000/document/_mapping
-
 PUT /ohsumed_20000/_settings
 {
     "index" : {
@@ -56,6 +50,43 @@ PUT /ohsumed_20000/_settings
     }
 }
 
+GET _cat/indices
+GET ohsumed_20000/_settings
+GET /ohsumed_20000/document/_mapping
+GET /ohsumed_20000/document/_search
 
+GET /ohsumed_20000/document/_search
+{
+  "query": {
+    "term": {
+      "file_name": "0000023"
+    }
+  }
+}
 
+GET /ohsumed_20000/document/_search
+{
+  "query": {
+    "term": {
+      "file_name": "0012431"
+    }
+  }
+}
 
+GET /ohsumed_20000/document/_search
+{
+  "query": {
+    "term": {
+      "file_name": "0016301"
+    }
+  }
+}
+
+GET /ohsumed_20000/document/_search
+{
+  "query": {
+    "term": {
+      "file_name": "0013754"
+    }
+  }
+}

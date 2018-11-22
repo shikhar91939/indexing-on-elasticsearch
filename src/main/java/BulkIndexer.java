@@ -43,7 +43,7 @@ public class BulkIndexer {
                     String name = file.getName();
 
                     // Using Gson to make java Objects and then convert them to json strings
-                    Ohsumed_doc obj_ohsOhsumed_doc = new Ohsumed_doc(name, content);
+                    OhsumedDoc obj_ohsOhsumed_doc = new OhsumedDoc(name, content);
                     String jsonSource_gson = gson.toJson(obj_ohsOhsumed_doc);
 
                     HttpEntity httpEntity = new NStringEntity(
